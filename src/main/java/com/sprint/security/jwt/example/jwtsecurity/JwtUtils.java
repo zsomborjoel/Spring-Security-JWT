@@ -26,7 +26,7 @@ public class JwtUtils {
 	@Value("${bezkoder.app.jwtExpirationMs}")
 	private int jwtExpirationMs;
 
-	public String generateJwtToken(Authentication authentication) {
+	public String generateJwtToken(org.apache.tomcat.util.net.openssl.ciphers.Authentication authentication) {
 
         // get username and password
 		UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
