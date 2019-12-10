@@ -11,15 +11,19 @@ import com.sprint.security.jwt.example.jwtsecurity.JwtUtils;
 import com.sprint.security.jwt.example.model.EnumRole;
 import com.sprint.security.jwt.example.model.Role;
 import com.sprint.security.jwt.example.model.User;
+import com.sprint.security.jwt.example.payload.request.LoginRequest;
+import com.sprint.security.jwt.example.payload.request.SignupRequest;
+import com.sprint.security.jwt.example.payload.response.JwtResponse;
+import com.sprint.security.jwt.example.payload.response.MessageResponse;
 import com.sprint.security.jwt.example.repository.RoleRepository;
 import com.sprint.security.jwt.example.repository.UserRepository;
 import com.sprint.security.jwt.example.service.UserDetailsImpl;
 
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -50,7 +54,7 @@ public class AuthController {
     JwtUtils jwtUtils;
 
     @PostMapping("/signup")
-    public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signupReqest) {
+    public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
 
         // ignore existing user
         if (userRepository.existsByUsername(signUpRequest.getUsername())) {
@@ -61,7 +65,7 @@ public class AuthController {
         // ignore existing email
         if (userRepository.existsByEmail(signUpRequest.getEmail())) {
             return ResponseEntity.badRequest()
-                                .body(new MessageResponse("Error? Email is already taken!"));
+                                .body(new MessageResponse("Error: Email is already taken!"));
         }
 
         // other case create new user

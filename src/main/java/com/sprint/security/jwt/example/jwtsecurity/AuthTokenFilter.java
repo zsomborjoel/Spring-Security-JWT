@@ -30,7 +30,7 @@ public class AuthTokenFilter extends OncePerRequestFilter {
     private static final Logger logger = LoggerFactory.getLogger(AuthTokenFilter.class);
 
     /**
-     * parsing & validating JWT,
+     * parsing & validating JWT
      */
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
@@ -63,8 +63,6 @@ public class AuthTokenFilter extends OncePerRequestFilter {
 
     /**
      * get authorization header
-     * @param request
-     * @return
      */
     private String parseJwt(HttpServletRequest request) {
         String headerAuth = request.getHeader("Authorization");
