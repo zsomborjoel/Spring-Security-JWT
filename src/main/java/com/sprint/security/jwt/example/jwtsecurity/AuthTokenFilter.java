@@ -59,6 +59,8 @@ public class AuthTokenFilter extends OncePerRequestFilter {
             logger.error("User authentication issue: {}", e);
         }
 
+        // make the filter available by callin next filter in the chain
+        filterChain.doFilter(request, response); 
     }
 
     /**

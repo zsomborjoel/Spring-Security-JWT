@@ -18,7 +18,7 @@ import javax.validation.constraints.Size;
 import javax.persistence.JoinColumn;
 
 @Entity
-@Table(name = "users")
+@Table(name = "users", schema = "jwt")
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,7 +38,7 @@ public class User {
 	private String password;
 
 	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "user_roles", 
+	@JoinTable(name = "user_roles", schema = "jwt",
 			    joinColumns = @JoinColumn(name = "user_id"), 
 			    inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();

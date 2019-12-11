@@ -12,7 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "roles")
+@Table(name = "roles", schema = "jwt")
 public class Role {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

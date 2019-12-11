@@ -1,0 +1,3 @@
+INSERT INTO jwt.roles(name) VALUES('ROLE_USER');
+INSERT INTO jwt.roles(name) VALUES('ROLE_MODERATOR');
+INSERT INTO jwt.roles(name) VALUES('ROLE_ADMIN');

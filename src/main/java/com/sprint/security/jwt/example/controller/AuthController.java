@@ -35,7 +35,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/apu/auth")
+@RequestMapping("/api/auth")
 public class AuthController {
 
     @Autowired
@@ -90,10 +90,14 @@ public class AuthController {
                 case "admin":
                     Role adminRole = roleRepository.findByName(EnumRole.ROLE_ADMIN)                                                
                                         .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                    roles.add(adminRole);
+
                     break;
                 case "mod":
                     Role modRole = roleRepository.findByName(EnumRole.ROLE_MODERATOR)
                                         .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                    roles.add(modRole);
+                                                                            
                     break;
                 default:
                     Role userRole = roleRepository.findByName(EnumRole.ROLE_USER)

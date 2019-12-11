@@ -4,7 +4,6 @@ import com.sprint.security.jwt.example.jwtsecurity.AuthEntryPointJwt;
 import com.sprint.security.jwt.example.jwtsecurity.AuthTokenFilter;
 import com.sprint.security.jwt.example.service.UserDetailsServiceImpl;
 
-import org.apache.catalina.authenticator.SpnegoAuthenticator.AuthenticateAction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -68,8 +67,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .and()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // applicaiton wont create any session
             .and()
-            .authorizeRequests().antMatchers("/api/auth/**").permitAll()
-            .antMatchers("/api/test/**").permitAll()
+            .authorizeRequests()
+                .antMatchers("/api/auth/**").permitAll()
+                .antMatchers("/api/test/**").permitAll()
             .anyRequest().authenticated();
         
         http.addFilterBefore(authenticationTokenFilter(), UsernamePasswordAuthenticationFilter.class); // add json web token filter before checking username and password
